@@ -10,18 +10,20 @@ use App\Models\Contractor;
 use App\Models\Lga;
 use App\Models\Mda;
 use App\Models\Project;
+use App\Models\Sector;
 use App\Models\State;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function __construct(Contractor $contractor, State $state, Lga $lga, Mda $mda, Project $project)
+    public function __construct(Contractor $contractor, State $state, Lga $lga, Mda $mda, Project $project, Sector $sector)
     {
         $this->state = $state;
         $this->lga = $lga;
         $this->mda = $mda;
         $this->contractor = $contractor;
         $this->project = $project;
+        $this->sector = $sector;
     }
     /**
      * Display a listing of the resource.
@@ -74,6 +76,13 @@ class ProjectController extends Controller
             {
                 throw new Exception('MDA record does not exist', 404);
             }
+            
+            //Check if the sector exist
+            $sector = $this->sector->find($request->sector_id);
+            if(is_null($sector))
+            {
+                throw new Exception('Sector record does not exist', 404);
+            }
 
             $this->project->create([
                 'title' => $request->title,
@@ -83,7 +92,8 @@ class ProjectController extends Controller
                 'contractor_id' => $request->contractor_id,
                 'budget_amount' => $request->budget_amount,
                 'contract_amount' => $request->contract_amount,
-                'mda_id' => $request->mda_id
+                'mda_id' => $request->mda_id,
+                'sector_id' => $request->sector_id
             ]);
 
             $data['message'] = 'Project record was created successfully';
@@ -172,7 +182,7 @@ class ProjectController extends Controller
                 throw new Exception('MDA record does not exist', 404);
             }
 
-            $this->project->create([
+            $project->update([
                 'title' => $request->title,
                 'state_id' => $request->state_id,
                 'lga_id' => $request->lga_id,
@@ -180,7 +190,8 @@ class ProjectController extends Controller
                 'contractor_id' => $request->contractor_id,
                 'budget_amount' => $request->budget_amount,
                 'contract_amount' => $request->contract_amount,
-                'mda_id' => $request->mda_id
+                'mda_id' => $request->mda_id,
+                'sector_id' => $request->sector_id
             ]);
             
             $data['message'] = 'Project record was updated successfully';

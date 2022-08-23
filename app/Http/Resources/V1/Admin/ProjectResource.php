@@ -28,7 +28,8 @@ class ProjectResource extends JsonResource
             'project_contractor' => new ContractorResource($this->contractor),
             'project_contract_amount' => $this->contract_amount,
             'project_budget_amount' => $this->budget_amount,
-            'project_mda' => new MdaResource($this->mda),           
+            'project_mda' => new MdaResource($this->mda),   
+            'project_sector' => new SectorResource($this->sector),        
         ];
     }
 }

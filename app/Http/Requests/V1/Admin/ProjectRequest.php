@@ -31,7 +31,8 @@ class ProjectRequest extends FormRequest
                 'contractor_id' => ['required', 'uuid'],
                 'budget_amount' => ['required', 'numeric'],
                 'contract_amount' => ['required', 'numeric'],
-                'mda_id' => ['required', 'uuid']
+                'mda_id' => ['required', 'uuid'],
+                'sector_id' => ['required', 'uuid'],
             ];
         }
         else if ($this->getMethod() == 'PUT')
@@ -44,7 +45,8 @@ class ProjectRequest extends FormRequest
                 'contractor_id' => ['required', 'uuid'],
                 'budget_amount' => ['required', 'numeric'],
                 'contract_amount' => ['required', 'numeric'],
-                'mda_id' => ['required', 'uuid']
+                'mda_id' => ['required', 'uuid'],
+                'sector_id' => ['required', 'uuid'],
             ];
         }
         return $rules;
