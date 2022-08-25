@@ -28,10 +28,9 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ProjectRequest $request)
+    public function index()
     {
-        $perPage = $request->per_page ?? 20;
-        $projects = $this->project->latest()->paginate($perPage);
+        $projects = $this->project->latest()->get();
         return ProjectResource::collection($projects);
     }
 }
