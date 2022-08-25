@@ -20,8 +20,8 @@ return new class extends Migration
             $table->uuid('lga_id')->index();
             $table->integer('year')->length(4);
             $table->uuid('contractor_id')->index();
-            $table->decimal('budget_amount');
-            $table->decimal('contract_amount');
+            $table->string('budget_amount');
+            $table->string('contract_amount');
             $table->uuid('mda_id')->index();
             $table->uuid('sector_id')->index();
             $table->timestamps();
