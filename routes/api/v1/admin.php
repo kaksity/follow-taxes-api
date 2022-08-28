@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\V1\Admin\DashboardController;
 use App\Http\Controllers\V1\Admin\AdminAuthController;
 use App\Http\Controllers\V1\Admin\ContractorController;
 use App\Http\Controllers\V1\Admin\LgaController;
@@ -24,5 +25,6 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
         Route::apiResource('/sectors', SectorController::class);
     });
 
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::apiResource('/projects', ProjectController::class);
 });

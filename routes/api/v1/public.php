@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\V1\Public\ContractorController;
-use App\Http\Controllers\V1\Public\DashboardController;
+use App\Http\Controllers\V1\Public\ChartController;
 use App\Http\Controllers\V1\Public\LgaController;
 use App\Http\Controllers\V1\Public\MdaController;
 use App\Http\Controllers\V1\Public\ProjectController;
@@ -14,4 +14,4 @@ Route::get('/mdas', [MdaController::class, 'index']);
 Route::get('/contractors', [ContractorController::class, 'index']);
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/sectors', [SectorController::class, 'index']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/charts', [ChartController::class, 'index']);
