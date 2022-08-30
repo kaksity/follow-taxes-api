@@ -22,4 +22,9 @@ class Lga extends Model
     {
         return $this->hasMany(Project::class, 'lga_id');
     }
+
+    public function lgaBudgetAmount()
+    {
+        return $this->hasMany(LgaBudgetAmount::class, 'lga_id');
+    }
 }

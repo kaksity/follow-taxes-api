@@ -3,6 +3,7 @@
 use App\Http\Controllers\V1\Admin\DashboardController;
 use App\Http\Controllers\V1\Admin\AdminAuthController;
 use App\Http\Controllers\V1\Admin\ContractorController;
+use App\Http\Controllers\V1\Admin\LgaBudgetAmountController;
 use App\Http\Controllers\V1\Admin\LgaController;
 use App\Http\Controllers\V1\Admin\MdaController;
 use App\Http\Controllers\V1\Admin\ProjectController;
@@ -27,4 +28,5 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::apiResource('/projects', ProjectController::class);
+    Route::apiResource('/lga-budget-amounts', LgaBudgetAmountController::class);
 });
