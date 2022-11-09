@@ -6,6 +6,7 @@ use App\Http\Controllers\V1\Public\MdaController;
 use App\Http\Controllers\V1\Public\ProjectController;
 use App\Http\Controllers\V1\Public\SectorController;
 use App\Http\Controllers\V1\Public\StateController;
+use App\Http\Controllers\V1\Public\LgaBudgetAmountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/states', [StateController::class, 'index']);
@@ -15,3 +16,4 @@ Route::get('/contractors', [ContractorController::class, 'index']);
 Route::get('/projects', [ProjectController::class, 'index']);
 Route::get('/sectors', [SectorController::class, 'index']);
 Route::get('/charts', [ChartController::class, 'index']);
+Route::apiResource('/lga-budget-amounts', LgaBudgetAmountController::class);
