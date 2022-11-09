@@ -17,4 +17,8 @@ class Sector extends Model
     {
         return $this->hasMany(Project::class, 'sector_id');
     }
+    public function lgaBudgetAmount()
+    {
+        return $this->hasMany(LgaBudgetAmount::class, 'sector_id');
+    }
 }

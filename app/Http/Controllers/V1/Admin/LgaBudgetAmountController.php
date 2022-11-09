@@ -38,7 +38,8 @@ class LgaBudgetAmountController extends Controller
         {
             $lgaBudgetAmount = $this->lgaBudgetAmount->where([
                 'lga_id' => $request->lga_id,
-                'year' => $request->year
+                'year' => $request->year,
+                'sector_id' => $request->sector_id
             ])->first();
 
             if($lgaBudgetAmount)
@@ -49,6 +50,7 @@ class LgaBudgetAmountController extends Controller
             $this->lgaBudgetAmount->create([
                 'lga_id' => $request->lga_id,
                 'year' => $request->year,
+                'sector_id' => $request->sector_id,
                 'amount' => $request->amount
             ]);
 

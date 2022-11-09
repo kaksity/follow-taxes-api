@@ -15,4 +15,8 @@ class LgaBudgetAmount extends Model
     {
         return $this->belongsTo(Lga::class, 'lga_id');
     }
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class, 'sector_id');
+    }
 }

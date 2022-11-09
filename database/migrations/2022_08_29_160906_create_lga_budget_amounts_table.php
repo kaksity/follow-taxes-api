@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('lga_budget_amounts', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('sector_id')->index();
             $table->uuid('lga_id')->index();
             $table->string('amount');
             $table->string('year');
