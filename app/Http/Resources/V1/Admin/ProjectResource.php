@@ -14,11 +14,7 @@ class ProjectResource extends JsonResource
      */
     public function toArray($request)
     {
-      // <el-table-column label="Year" prop="project_year" />
-      // <el-table-column label="Contractor" prop="project_contractor" />
-      // <el-table-column label="Budget Amount" prop="project_budget_amount" />
-      // <el-table-column label="Contract Amount" prop="project_contract_amount" />
-      // <el-table-column label="MDA" prop="project_mda" />
+     
         return [
             'id' => $this->id,
             'project_title' => $this->title,

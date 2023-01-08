@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lga_budget_amounts', function (Blueprint $table) {
+        Schema::create('budget_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('budget_item_id')->index();
-            $table->uuid('lga_id')->index();
-            $table->string('proposed_amount');
-            $table->string('approved_amount');
-            $table->string('revised_amount');
-            $table->string('actual_amount');
-            $table->string('year');
+            $table->string('name');
+            $table->string('type');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lga_budget_amounts');
+        Schema::dropIfExists('budget_items');
     }
 };

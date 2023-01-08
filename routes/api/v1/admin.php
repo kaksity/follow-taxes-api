@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\V1\Admin\BudgetItemController;
 use App\Http\Controllers\V1\Admin\DashboardController;
 use App\Http\Controllers\V1\Admin\AdminAuthController;
 use App\Http\Controllers\V1\Admin\ContractorController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\V1\Admin\MdaController;
 use App\Http\Controllers\V1\Admin\ProjectController;
 use App\Http\Controllers\V1\Admin\SectorController;
 use App\Http\Controllers\V1\Admin\StateController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/auth'], function(){
@@ -16,6 +18,7 @@ Route::group(['prefix' => '/auth'], function(){
     Route::post('/register', [AdminAuthController::class, 'registerAdmin']);
     Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth:sanctum');
 });
+
 
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::group(['prefix' => '/general-settings'], function() {
@@ -29,4 +32,5 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::apiResource('/projects', ProjectController::class);
     Route::apiResource('/lga-budget-amounts', LgaBudgetAmountController::class);
+    Route::apiResource('/budget-items', BudgetItemController::class);
 });

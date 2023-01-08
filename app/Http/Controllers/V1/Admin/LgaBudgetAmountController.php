@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class LgaBudgetAmountController extends Controller
 {
-    public function __construct(LgaBudgetAmount $lgaBudgetAmount)
+    public function __construct(public LgaBudgetAmount $lgaBudgetAmount)
     {
         $this->lgaBudgetAmount = $lgaBudgetAmount;
     }
@@ -20,9 +20,16 @@ class LgaBudgetAmountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(LgaBudgetAmountRequest $request)
     {
-        $lgaBudgetAmounts = $this->lgaBudgetAmount->latest()->get();
+        $lgaId = $request->lga_id ?? null;
+        $budgetItemId = $request->budget_item_id ?? null;
+
+        $lgaBudgetAmounts = $this->lgaBudgetAmount->with(['lga', 'budgetItem'])->when($lgaId, function ($model, $lgaId) {
+            $model->where('lga_id', $lgaId);
+        })->when($budgetItemId, function($model, $budgetItemId) {
+            $model->where('lga_id', $budgetItemId);
+        })->latest()->get();
         return LgaBudgetAmountResource::collection($lgaBudgetAmounts);
     }
 
@@ -38,8 +45,8 @@ class LgaBudgetAmountController extends Controller
         {
             $lgaBudgetAmount = $this->lgaBudgetAmount->where([
                 'lga_id' => $request->lga_id,
+                'budget_item_id' => $request->budget_item_id,
                 'year' => $request->year,
-                'sector_id' => $request->sector_id
             ])->first();
 
             if($lgaBudgetAmount)
@@ -49,9 +56,12 @@ class LgaBudgetAmountController extends Controller
 
             $this->lgaBudgetAmount->create([
                 'lga_id' => $request->lga_id,
+                'budget_item_id' => $request->budget_item_id,
                 'year' => $request->year,
-                'sector_id' => $request->sector_id,
-                'amount' => $request->amount
+                'proposed_amount' => $request->proposed_amount,
+                'approved_amount' => $request->approved_amount,
+                'revised_amount' => $request->revised_amount,
+                'actual_amount' => $request->actual_amount,
             ]);
 
             $data['message'] = 'LGA Budget Amount record was created successfully';
@@ -84,9 +94,10 @@ class LgaBudgetAmountController extends Controller
             }
 
             $lgaBudgetAmount->update([
-                'lga_id' => $request->lga_id,
-                'year' => $request->year,
-                'amount' => $request->amount
+                'proposed_amount' => $request->proposed_amount,
+                'approved_amount' => $request->approved_amount,
+                'revised_amount' => $request->revised_amount,
+                'actual_amount' => $request->actual_amount,
             ]);
 
             $data['message'] = 'LGA Budget Amount record was update successfully';

@@ -17,9 +17,12 @@ class LgaBudgetAmountResource extends JsonResource
         return [
             'id' => $this->id,
             'lga' => new LgaResource($this->lga),
-            'sector' => new SectorResource($this->sector),
+            'budget_item' => new BudgetItemResource($this->budgetItem),
             'year' => $this->year,
-            'amount' => $this->amount
+            'proposed_amount'=>$this->proposed_amount,
+            'approved_amount'=>$this->approved_amount,
+            'revised_amount'=>$this->revised_amount,
+            'actual_amount'=>$this->actual_amount,
         ];
     }
 }
